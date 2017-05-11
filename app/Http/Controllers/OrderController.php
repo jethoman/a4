@@ -17,6 +17,7 @@ class OrderController extends Controller
     public function createNewOrder(Request $request) {
         $accountsForDropdown = Account::getAccountsForDropdown();
         $itemsForCheckboxes = Item::getItemsForCheckboxes();
+
         return view('OrderTracker.newOrder')->with([
             'accountsForDropdown' => $accountsForDropdown,
             'itemsForCheckboxes' => $itemsForCheckboxes
@@ -40,14 +41,14 @@ class OrderController extends Controller
         $items = ($request->items) ?: [];
         $order->items()->sync($items);
         $order->save();
+
         Session::flash('message', 'The Order '.$request->order_desc.' was added.');
 
         return redirect('/orders');
     }
     public function viewAllOrders(Request $request) {
 
-         $orders = Order::orderBy('order_desc')->get(); # Query DB
-
+        $orders = Order::orderBy('order_desc')->get();
 
         return view('OrderTracker.index')->with([
             'orders' => $orders,
@@ -94,7 +95,6 @@ class OrderController extends Controller
 
         $itemsForCheckboxes = Item::getItemsForCheckboxes();
 
-
         $itemsForThisOrder = [];
         foreach($order->items as $item) {
             $itemsForThisOrder[] = $item->item_desc;
@@ -112,7 +112,6 @@ class OrderController extends Controller
 
     public function saveEdits(Request $request) {
 
-        # Custom error message
         $messages = [
             'account_id.not_in' => 'account not selected.',
         ];
@@ -124,23 +123,16 @@ class OrderController extends Controller
 
         $order = Order::find($request->id);
 
-        # Edit order in the database
         $order->order_desc = $request->order_desc;
         $order->account_id = $request->account_id;
 
-        # If there were items selected...
         if($request->items) {
             $items = $request->items;
         }
-        # If there were no items selected (i.e. no items in the request)
-        # default to an empty array of items
         else {
             $items = [];
         }
 
-        # Above if/else could be condensed down to this: $items = ($request->items) ?: [];
-
-        # Sync items
         $order->items()->sync($items);
         $order->save();
 
@@ -151,7 +143,6 @@ class OrderController extends Controller
 
     public function confirmDeletion($id) {
 
-        # Get the order they're attempting to delete
         $order = Order::find($id);
 
         if(!$order) {
@@ -162,14 +153,8 @@ class OrderController extends Controller
         return view('OrderTracker.delete')->with('order', $order);
     }
 
-
-    /**
-    * POST
-    * Actually delete the order
-    */
     public function delete(Request $request) {
 
-        # Get the order to be deleted
         $order = Order::find($request->id);
 
         if(!$order) {
@@ -181,7 +166,6 @@ class OrderController extends Controller
 
         $order->delete();
 
-        # Finish
         Session::flash('message', $order->order_desc.' was deleted.');
         return redirect('/orders');
     }

@@ -12,14 +12,11 @@
         @else
             @foreach($orders as $order)
 
-
-
                     <a href='/orders/{{ $order->id }}'><h3>{{ $order->order_desc }}</h3></a>
 
                     <a class='OrderAction' href='/orders/edit/{{ $order->id }}'><i class='fa fa-pencil'></i></a>
                     <a class='OrderAction' href='/orders/{{ $order->id }}'><i class='fa fa-eye'></i></a>
                     <a class='OrderAction' href='/orders/delete/{{ $order->id }}'><i class='fa fa-trash'></i></a>
-
 
             @endforeach
         @endif

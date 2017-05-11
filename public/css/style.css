@@ -147,6 +147,7 @@ a:link:visited {
 }
 head {
     text-align: center;
+    background-color: white;
 }
 ul {
     list-style-type: none;
