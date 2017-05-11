@@ -37,13 +37,13 @@
         <a class='OrderAction' href='/orders/edit/{{ $order->id }}'>
         <img
 		src="/images/pencil.jpg"
-		alt="picture of an inventory on a clipboard"
+		alt="edit record"
 		width="50"></a>
 
         <a class='OrderAction' href='/orders/delete/{{ $order->id }}'>
         <img
 		src="/images/delete.png"
-		alt="picture of an inventory on a clipboard"
+		alt="delete record"
 		width="50"></a>
 
     </div>
