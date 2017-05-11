@@ -15,8 +15,9 @@
     @if(Session::get('message') != null)
             <div class='message'>{{ Session::get('message') }}</div>
     @endif
-	<header>
+
         <div class='background'>
+    <header>
     	<h1>
 			@yield('bigtext', 'Department Order Tracker')
 		</h1>
@@ -39,7 +40,6 @@
 		@yield('content')
 	</div>
 
-</div>
 	<footer>
 
 	</footer>
