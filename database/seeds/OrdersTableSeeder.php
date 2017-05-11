@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Order;
+use App\Account;
 class OrdersTableSeeder extends Seeder
 {
     /**
@@ -15,25 +16,33 @@ class OrdersTableSeeder extends Seeder
      */
     public function run()
     {
-        $item_id = Item::where('item_desc', '=', $item_desc)->pluck('id')->first();
 
-        Order::insert([
-        'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'order_desc' => 'Parts to fix computers',
-        'item_id' => $item_id
-        ]);
+        $orders =[
+            'Parts to fix computers' => ['Repairs'],
+            'Access Points for Schools' => ['Infrastructure'],
+            'Laptop for IT Manager' => ['Equipment']
+        ];
+    #    $books = json_decode(file_get_contents(database_path().'/books.json'), True);
 
-        Order::insert([
-        'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'order_desc' => 'Access Points for Schools'
-        ]);
+        $timestamp=Carbon\Carbon::now()->subDays(count($orders));
+        $timestampForThisBook = $timestamp->addDay()->toDateTimeString();
+        foreach($orders as $order_desc => $accounts)
+        {
+            foreach($accounts as $account_desc)
+            {
+                $account_id = Account::where('account_desc','like',$account_desc)->pluck('id')->first();
 
-        Order::insert([
-        'created_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'order_desc' => 'New Laptop for IT Manager'
-        ]);
+            }
+            Order::insert([
+                'created_at' => $timestampForThisBook,
+                'updated_at' => $timestampForThisBook,
+
+                'order_desc' => $order_desc,
+                'account_id' => $account_id,
+
+            ]);
+
+        }
+
     }
 }

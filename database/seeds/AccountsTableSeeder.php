@@ -22,11 +22,11 @@ class AccountsTableSeeder extends Seeder
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         'account_desc' => 'Repairs'
         ]);
-        
+
         Account::insert([
         'created_at' => Carbon\Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
-        'account_desc' => 'Supplies'
+        'account_desc' => 'Infrastructure'
         ]);
     }
 }

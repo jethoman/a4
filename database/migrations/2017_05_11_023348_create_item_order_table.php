@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountOrderTable extends Migration
+class CreateItemOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateAccountOrderTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_order', function (Blueprint $table){
-            # creating primary key for pivot table
+        Schema::create('item_order', function (Blueprint $table){
             $table->increments('id');
             $table->timestamps();
-            # creating ids that will be foreign keys
+
+            $table->integer('item_id')->unsigned();
             $table->integer('order_id')->unsigned();
-            $table->integer('account_id')->unsigned();
-            # making the above ids foreign keys
+
+            $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->foreign('account_id')->references('id')->on('accounts');
+
         });
     }
 
@@ -33,6 +33,6 @@ class CreateAccountOrderTable extends Migration
      */
     public function down()
     {
-        Schema::drop('account_order');
+        Schema::drop('item_order');
     }
 }

@@ -1,0 +1,27 @@
+{
+	"Access Points for MCAS": {
+		"" : ,
+		"item_id" : 1
+	},
+	"Belkin Patch Cables": {
+		"order_id" : 1,
+		"item_id" : 2
+	},
+	"8 GB Ram Chip": {
+		"order_id" : 2,
+		"item_id" : 3
+	},
+	"Dell XPS 15": {
+		"order_id" : 3,
+		"item_id" : 4
+	},
+	"Thunderbolt Dock": {
+		"order_id" : 3,
+		"item_id" : 5
+	},
+	"500GB HDD": {
+		"order_id" : 2,
+		"item_id" : 6
+	}
+
+}

@@ -6,12 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public function items() {
-		
-		return $this->hasMany('App\Item');
-	}
-    public function accounts()
+    public function items()
     {
-        return $this->belongToMany('App\Account')->withTimestamps();
+        return $this->belongsToMany('App\Item')->withTimestamps();
     }
 }
