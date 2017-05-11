@@ -16,7 +16,7 @@
             <div class='message'>{{ Session::get('message') }}</div>
     @endif
 
-        <div class='background'>
+
     <header>
     	<h1>
 			@yield('bigtext', 'Department Order Tracker')
@@ -26,6 +26,7 @@
 		alt="picture of an inventory on a clipboard"
 		width="500">
 	</header>
+    <div class='background'>
     <nav>
         <ul>
             <li><a href='/'>Home</a></li>
@@ -39,7 +40,7 @@
 	<div>
 		@yield('content')
 	</div>
-
+</div>
 	<footer>
 
 	</footer>
